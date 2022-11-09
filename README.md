@@ -8,7 +8,7 @@ The data are from 2 json files combined_by_ds.json which combines the dowloads p
 
 ## The Analysis
 
-After reading data, a 1st data frame is built simply loading all datasets over time. This is cleaned up removing outliers based on total count (some >10000 access). This inermediate result can be seen in the figure bellow.
+After reading data, a 1st data frame is built simply loading all datasets over time. This is cleaned up removing outliers based on total count (some >10000 access). This intermediate result can be seen in the figure below.
 
 ![download over time](https://github.com/CPernet/OpenNeuroCount/blob/main/fig/OpenNeuroTime.jpg)
 
