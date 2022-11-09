@@ -4,7 +4,7 @@ Simple script to analyze datasets count from OpenNeuro
 
 ## The Data
 
-The data are from 2 json files combined_by_ds.json which combines the dowloads per months inside each dataset, and from sizes.json which reports the dataset sizes. This second file is needed to estimate to number of downloads, that is divide the number of bytes downloaded per the dataset size. Indeed, while many datasets are downloaded at once, single files, or part of the data can also be downloaded, so it does not need to be an integer.
+The data are from 2 json files `combined_by_ds.json` which combines the dowloads per months inside each dataset, and from `sizes.json` which reports the dataset sizes. This second file is needed to estimate to number of downloads, that is divide the number of bytes downloaded per the dataset size. Indeed, while many datasets are downloaded at once, single files, or part of the data can also be downloaded, so it does not need to be an integer.
 
 ## The Analysis
 
