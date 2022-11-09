@@ -13,7 +13,7 @@ After reading data, a 1st data frame is built simply loading all datasets over t
 ![download over time](https://github.com/CPernet/OpenNeuroCount/blob/main/fig/OpenNeuroTime.jpg)
 
 
-From this data frame, all datasets are time re-aligned with 0 = upload time. The data are split into three groups with a group of high nuber of downloads, versus middle ground, vs low. Data are plotted with a 2nd order polynomial (not shown here or in the script, but the RMS of the 2nd order fit was better than 1st or 3rd).
+From this data frame, all datasets are time re-aligned with 0 = upload time. The data are split into three groups with a group of high number of downloads (the + outlier data on the right hand side rain plot which is equivalent to >25 percentile), versus middle ground (with the 95% High Density Interval), vs low (<25 percentile). Data are plotted with a 2nd order polynomial (not shown here or in the script, but the RMS of the 2nd order fit was better than 1st or 3rd).
 
 ![download from upload](https://github.com/CPernet/OpenNeuroCount/blob/main/fig/OpenNeuroCounts.jpg)
 
