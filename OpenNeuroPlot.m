@@ -10,6 +10,8 @@ for  d = 1:size(ds,1)
     if contains(ds{d},keep)
         dsstruct = datain.(ds{d});
         size_index = contains(keep,ds{d});
+        ds_record{d,1} = ds{d};
+        ds_record{d,2} = sizes.(keep{size_index});
 
         if isfield(dsstruct,'x2020')
             for c=1:12
@@ -38,12 +40,14 @@ for  d = 1:size(ds,1)
 end
 clean = find(nansum(dataout,2) == 0);
 dataout(clean,:) = []; 
+ds_record(clean,:) = [];
 clean = find(nansum(dataout,1) == 0);
 dataout(:,clean) = []; 
 
 total = nansum(dataout,2);
 [~,~,outliers]=rst_data_plot(total,'estimator','trimmed mean','kernel','off'); close gcf
 dataout(outliers,:) = []; 
+ds_record(outliers,:) = [];
 
 for d=size(dataout,2):-1:1    
     [ql(d),qu(d)]=rst_idealf(dataout(:,d));
@@ -82,9 +86,10 @@ title('average total download with 95% HDI','FontSize',12)
 % gp3 = realigned_data(total>HDI(2),:);
 
 lt = mean(total)-prctile(total,25);
-gp1 = realigned_data(total<lt,:);
+gp1 = realigned_data(total<lt,:); s1 = cell2mat(ds_record(total<lt,2));
 gp2 = realigned_data(((total=<HDI(1))+(total>=HDI(2)))==0,:);
 gp3 = realigned_data(outliers,:); % equivalent to ht = mean(total)+prctile(total,75);
+s3  = cell2mat(ds_record(outliers,2));
 
 subplot(4,3,[1 2 4 5 7 8]); 
 ft = fittype( 'poly2' );
@@ -117,3 +122,7 @@ fprintf('%g of datasets have above 2 years duration \n',...
     sum(sum(~isnan(realigned_data),2) >=24)/size(realigned_data,1)*100)
 fprintf('%g of datasets have ~%g downloads, totalizing %g of all downloads \n',...
     sum(outliers)/size(realigned_data,1)*100,mean(total(outliers)),sum(total(outliers))/sum(total)*100)
+
+% check data sizes
+[H,P,CI,STATS] = ttest2(s1,s3,'tail','right','vartype','unequal');
+fprintf('datasets do not differ in size t(%g)=%g p=%g\n',STATS.df,STATS.tstat,P)
